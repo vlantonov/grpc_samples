@@ -37,7 +37,7 @@ class Reader : public ClientReadReactor<HelloReply> {
     std::cout << "OnReadInitialMetadataDone " << ok << "\n";
   }
 
-  virtual void OnReadDone(bool ok) {
+  void OnReadDone(bool ok) override {
     std::cout << "OnReadDone " << ok << " \n";
     if (ok) {
       std::cout << "Received reply " << mReply->message() << '\n';

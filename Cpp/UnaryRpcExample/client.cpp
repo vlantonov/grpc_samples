@@ -7,8 +7,15 @@
 #include "grpc++/grpc++.h"
 #include "helloworld.grpc.pb.h"
 
-using namespace helloworld;
-using namespace grpc;
+using helloworld::Greeter;
+using helloworld::HelloReply;
+using helloworld::HelloRequest;
+
+using grpc::ClientContext;
+using grpc::ClientUnaryReactor;
+using grpc::Server;
+using grpc::ServerBuilder;
+using grpc::Status;
 
 class Reader : public ClientUnaryReactor {
  public:
@@ -17,7 +24,7 @@ class Reader : public ClientUnaryReactor {
     StartCall();
   }
 
-  void OnDone(const grpc::Status& s) override {
+  void OnDone(const Status& s) override {
     std::cout << "OnDone " << s.error_message() << " \n";
     std::unique_lock l{mMutex};
     mStatus = s;
