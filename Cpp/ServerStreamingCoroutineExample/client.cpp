@@ -30,9 +30,6 @@ int main() {
 
   HelloReply reply;
 
-  // Reader reader(stub.get(), &request, &reply);
-  // Status status = reader.Await();
-
   std::unique_ptr<grpc::ClientReader<HelloReply> > reader(
       stub->TestServerStream(&context, request));
   while (reader->Read(&reply)) {
