@@ -100,6 +100,11 @@ struct ServerWriteReactorPromiseType {
   void unhandled_exception() {
     finish(Status{grpc::StatusCode::UNKNOWN, "Unhandled Exception"});
   }
+
+  // Required for co_await response;
+  // auto await_transform(const HelloReply& response) noexcept {
+  //   return SendResponseAwaiter{response};
+  // }
 };
 
 ServerWriteReactorPromiseType::SendResponseAwaiter send(
@@ -127,6 +132,9 @@ class GreeterServiceImpl final : public Greeter::CallbackService {
 
     for (auto& response : mResponseMap[request->name()]) {
       co_await send(response);
+
+      // Requires await_transform
+      // co_await response;
     }
 
     co_return Status::OK;
