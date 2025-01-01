@@ -1,9 +1,10 @@
 // https://grpc.io/docs/languages/cpp/callback/
-// Client-side streaming RPC
+// Bidirectional streaming RPC
 
 #include <grpc++/grpc++.h>
 
 #include <iostream>
+#include <queue>
 
 #include "helloworld.grpc.pb.h"
 
@@ -47,7 +48,7 @@ class Streamer : public ServerBidiReactor<HelloRequest, HelloReply> {
           const static std::string prefix("Hi there ");
           response.set_message(prefix + mRequest.name());
           std::cout << "Prepared reply " << response.message() << '\n';
-          mToSendReplies.emplace_back(std::move(response));
+          mToSendReplies.emplace(std::move(response));
         }
       }
       NextWrite();
@@ -70,9 +71,9 @@ class Streamer : public ServerBidiReactor<HelloRequest, HelloReply> {
 
  private:
   void NextWrite() {
-    if (mRepliesIterator < mToSendReplies.size()) {
-      StartWrite(&(mToSendReplies[mRepliesIterator]));
-      mRepliesIterator++;
+    if (!mToSendReplies.empty()) {
+      StartWrite(&mToSendReplies.back());
+      mToSendReplies.pop();
     } else {
       {
         std::lock_guard lock{mMutex};
@@ -85,8 +86,7 @@ class Streamer : public ServerBidiReactor<HelloRequest, HelloReply> {
   std::mutex& mMutex;
   HelloRequest mRequest;
   std::vector<HelloRequest>* mReceivedRequests;
-  std::vector<HelloReply> mToSendReplies;
-  size_t mRepliesIterator{0};
+  std::queue<HelloReply> mToSendReplies;
 };
 
 class GreeterServiceImpl final : public Greeter::CallbackService {

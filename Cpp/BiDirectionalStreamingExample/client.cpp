@@ -1,5 +1,5 @@
 // https://grpc.io/docs/languages/cpp/callback/
-// Client-side streaming RPC
+// Bidirectional streaming RPC
 
 #include <grpc++/grpc++.h>
 
