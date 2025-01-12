@@ -29,3 +29,5 @@ make
 * [conan: Building for multiple configurations](https://docs.conan.io/2/tutorial/consuming_packages/different_configurations.html)
 * [conan grpc](https://conan.io/center/recipes/grpc)
 * [conan protobuf](https://conan.io/center/recipes/protobuf)
+* <https://github.com/buq2/grpc-conan>
+* <https://github.com/PhantomGrazzler/example-grpc-conan-cmake>
