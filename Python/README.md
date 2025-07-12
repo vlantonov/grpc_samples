@@ -18,3 +18,5 @@
 
 ## Links
 * <https://grpc.io/docs/languages/python/basics/>
+* <https://github.com/barkhayot/grpc-python-example>
+* [Python Microservices With gRPC](https://realpython.com/python-microservices-grpc/)
