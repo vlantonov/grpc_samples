@@ -1,20 +1,10 @@
-# Notes
+# Python samples
 
-## Prerequisite
-`pip3 install --upgrade protobuf`
+## Basic sample
+The original unary gRPC sample now lives in [basic/README.md](./basic/README.md).
 
-## Generate buffers
-`python3 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. ./helloworld.proto`
-
-## Resulting buffers
-* `helloworld_pb2.py`
-* `helloworld_pb2_grpc.py`
-
-## Server
-`python3 greeter_server.py`
-
-## Client
-`python3 greeter_client.py`
+## TLS / mTLS sample
+See [tls/README.md](./tls/README.md) for a working example that enables TLS and mutual TLS with generated certificates.
 
 ## Links
 * <https://grpc.io/docs/languages/python/basics/>
