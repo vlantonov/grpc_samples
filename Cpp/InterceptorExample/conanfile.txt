@@ -1,0 +1,10 @@
+[requires]
+grpc/1.54.3
+protobuf/3.21.12
+
+[layout]
+cmake_layout
+
+[generators]
+CMakeDeps
+CMakeToolchain
