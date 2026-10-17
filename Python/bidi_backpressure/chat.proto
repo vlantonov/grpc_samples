@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package chat;
+
+service ChatService {
+  rpc Chat(stream ChatRequest) returns (stream ChatReply) {}
+}
+
+message ChatRequest {
+  string name = 1;
+  int32 sequence = 2;
+}
+
+message ChatReply {
+  string message = 1;
+  int32 sequence = 2;
+}
