@@ -9,6 +9,9 @@ See [bidi_backpressure/README.md](./bidi_backpressure/README.md) for a stream th
 ## gRPC health and reflection
 See [health_reflection/README.md](./health_reflection/README.md) for a sample that exposes gRPC health and reflection.
 
+## gRPC middleware / interceptors
+See [interceptors/README.md](./interceptors/README.md) for a sample that adds auth, request logging, and OpenTelemetry-style trace propagation.
+
 ## TLS / mTLS sample
 See [tls/README.md](./tls/README.md) for a working example that enables TLS and mutual TLS with generated certificates.
 
